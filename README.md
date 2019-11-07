@@ -1,6 +1,12 @@
 # bioinformatics_topic5_group0
 Bioinformatics Fall'19 
 
+## Group 0
+* Erica Chio
+* Sasha Layne 
+* Allen Zhu
+* Peter Stella
+
 __did not include gsea output files (let us know if you want them)__
 
 ## Files In Repo
