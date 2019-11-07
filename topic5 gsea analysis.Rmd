@@ -1,0 +1,49 @@
+---
+title: "analysisOfData"
+author: "Erica Chio"
+date: "11/5/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+```{r, warning=FALSE}
+library(gdata)
+# library(XLConnect) 
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+```
+
+
+```{r}
+# data <- read.table('ranked_gene_list_na_pos_versus_na_neg.xls')
+negative <- read.table('gsea_preranked_results/gsea_report_for_na_neg_1572977372507.xls', fill = TRUE , header=TRUE, sep="\t")
+positive <- read.table('gsea_preranked_results/gsea_report_for_na_pos_1572977372507.xls', fill = TRUE, header=TRUE, sep="\t")
+#positive
+```
+
+```{r}
+positiveT <- select(positive, 1, 6, 8)
+negativeT <- select(negative, 1, 6, 8)
+```
+
+```{r}
+positiveTemp <- positiveT[1:10,]
+negativeTemp <- negativeT[1:10,]
+```
+
+```{r}
+total <- rbind(positiveTemp, negativeTemp)
+total
+```
+
+```{r, fig.width=8,fig.height=5}
+p<-ggplot(total, aes(x=total$NAME, y=total$NES, fill=total$FDR.q.val)) +
+  geom_bar(stat="identity")
+p + coord_flip() + labs(y  = "NES", x = "NAME", title="Top Upregulated and Downregulated Pathways", fill="FDR.q-value")
+```
+
